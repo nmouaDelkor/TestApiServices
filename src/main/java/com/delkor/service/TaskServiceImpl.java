@@ -2,6 +2,7 @@ package com.delkor.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -31,12 +32,12 @@ public class TaskServiceImpl implements TaskService {
 		this.taskRepository = taskRepository;
 	}
 
-	public Task findOne(int id) {
-		return taskRepository.findOne(id);
+	public Optional<Task> findById(int id) {
+		return taskRepository.findById(id);
 	}
 	
 	public List<Task> findAll() {
-		List<Task> tasks = new ArrayList<>();
+		List<Task> tasks = new ArrayList<Task>();
 		for (Task task : taskRepository.findAll()) {
 			tasks.add(task);
 		}
@@ -47,8 +48,8 @@ public class TaskServiceImpl implements TaskService {
 		return taskRepository.save(task);
 	}
 
-	public String delete(int id) {
-		taskRepository.delete(id);
+	public String deleteById(int id) {
+		taskRepository.deleteById(id);
 		return String.format("ID: %d deleted.", id);
 	}
 

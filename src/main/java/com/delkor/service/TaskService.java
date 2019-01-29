@@ -1,6 +1,7 @@
 package com.delkor.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.delkor.model.Task;
 
@@ -14,8 +15,8 @@ import com.delkor.model.Task;
  *
  */
 public interface TaskService {
-	public Task findOne(int id);
+	public Optional<Task> findById(int id);
 	public List<Task> findAll();
 	public Task save(Task task);
-	public String delete(int id);
+	public String deleteById(int id);
 }

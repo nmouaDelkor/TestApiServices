@@ -2,6 +2,7 @@ package com.delkor.controller;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,13 +46,13 @@ public class RestApiController {
 	}
 	
 	@GetMapping("/getTask/{id}")
-	public Task findTask(@PathVariable int id) {
-		return taskService.findOne(id);
+	public Optional<Task> findTask(@PathVariable int id) {
+		return taskService.findById(id);
 	}
 	
 	@GetMapping("/deleteTask/{id}")
 	public String deleteTask(@PathVariable int id) {
-		return taskService.delete(id);
+		return taskService.deleteById(id);
 	}
 	
 	
