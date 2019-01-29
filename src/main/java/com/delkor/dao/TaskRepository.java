@@ -25,4 +25,18 @@ import com.delkor.model.Task;
  */
 public interface TaskRepository extends CrudRepository<Task, Integer> {
 
+	// If you need CUSTOM queries not provided by CrudRepository, you can define
+	// them here with the help of annotations
+
+	// CrudRepository Docs are here:
+	// https://docs.spring.io/spring-data/commons/docs/current/api/org/springframework/data/repository/CrudRepository.html
+	// https://docs.spring.io/spring-data/jpa/docs/2.0.0.RELEASE/reference/html/#jpa.query-methods.at-query
+	// https://docs.spring.io/spring-data/jpa/docs/2.0.0.RELEASE/reference/html/#repositories.custom-implementations
+	
+	// Example
+	// Sample Tutorial: http://zetcode.com/springboot/datajpaquery/
+	// Summary: Annotate your custom query with @Query and pass a Param of the actual SQL query you want executed
+	//	@Query("select c from City c where c.name like %?1")
+	//	List<City> findByNameEndsWith(String chars);
+	
 }

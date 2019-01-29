@@ -32,18 +32,28 @@ public class RestApiController {
 	@Autowired
 	private TaskService taskService;
 
-	@GetMapping("/all-tasks")
+	@GetMapping("/getAllTasks")
 	public List<Task> allTasks() {
 		return taskService.findAll();
 	}
 
-	@GetMapping("/save-task/{name}/{desc}")
+	@GetMapping("/saveTask/{name}/{desc}")
 	public Task saveTask(@PathVariable String name, @PathVariable String desc) {
-		System.out.println(name);
-		System.out.println(desc);
 		Task task = new Task(name, desc, new Date(), false);
 		taskService.save(task);
 		return task;
 	}
+	
+	@GetMapping("/getTask/{id}")
+	public Task findTask(@PathVariable int id) {
+		return taskService.findOne(id);
+	}
+	
+	@GetMapping("/deleteTask/{id}")
+	public String deleteTask(@PathVariable int id) {
+		return taskService.delete(id);
+	}
+	
+	
 
 }

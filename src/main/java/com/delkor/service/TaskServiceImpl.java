@@ -23,13 +23,18 @@ public class TaskServiceImpl implements TaskService {
 
 	// Reason we don't have to Autowire this is because TaskRepository extends from
 	// CrudRepository, which is already packaged within Spring and initialized. This
-	// is also the reason why we mark it as FINAL.
+	// is also the reason why we mark it as FINAL (we only ever want one instance of
+	// a Repository for each Service).
 	private final TaskRepository taskRepository;
 
 	public TaskServiceImpl(TaskRepository taskRepository) {
 		this.taskRepository = taskRepository;
 	}
 
+	public Task findOne(int id) {
+		return taskRepository.findOne(id);
+	}
+	
 	public List<Task> findAll() {
 		List<Task> tasks = new ArrayList<>();
 		for (Task task : taskRepository.findAll()) {
@@ -38,12 +43,13 @@ public class TaskServiceImpl implements TaskService {
 		return tasks;
 	}
 
-	public void save(Task task) {
-		taskRepository.save(task);
+	public Task save(Task task) {
+		return taskRepository.save(task);
 	}
 
-	public void delete(int id) {
+	public String delete(int id) {
 		taskRepository.delete(id);
+		return String.format("ID: %d deleted.", id);
 	}
 
 }

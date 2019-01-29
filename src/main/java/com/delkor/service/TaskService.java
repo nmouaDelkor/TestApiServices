@@ -14,7 +14,8 @@ import com.delkor.model.Task;
  *
  */
 public interface TaskService {
+	public Task findOne(int id);
 	public List<Task> findAll();
-	public void save(Task task);
-	public void delete(int id);
+	public Task save(Task task);
+	public String delete(int id);
 }
