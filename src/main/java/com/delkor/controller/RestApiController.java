@@ -40,25 +40,28 @@ public class RestApiController {
 
 	// -- REST API for Item Parts -- //
 
-	@GetMapping("/getAllPart")
+	@GetMapping("/getpart")
 	public List<ItemPart> allParts() {
 		return itemPartService.findAll();
 	}
 
-	@GetMapping("/getPart/{id}")
+	@GetMapping("/getpart/{id}")
 	public Optional<ItemPart> findPart(@PathVariable int id) {
 		return itemPartService.findById(id);
 	}
 
-	// TODO: This doesn't work... Due to constraints?
-	@GetMapping("/deletePart/{id}")
+	// TODO: This doesn't work due to constraints (can't delete parent row)
+	// java.sql.SQLIntegrityConstraintViolationException: Cannot delete or update a
+	// parent row: a foreign key constraint fails (`delkorapps`.`prt_po`, CONSTRAINT
+	// `prt_po_ibfk_1` FOREIGN KEY (`prt_seq_id`) REFERENCES `prt` (`prt_seq_id`))
+	@GetMapping("/deletepart/{id}")
 	public String deletePart(@PathVariable int id) {
 		return itemPartService.deleteById(id);
 	}
 
 	// TODO: Also doesn't work... Due to constraints?
-	@GetMapping("/savePart/{partNum}/{partDesc}")
-	public ItemPart saveTask(@PathVariable String partNum, @PathVariable String partDesc) {
+	@GetMapping("/savepart/{id}/{partNum}/{partDesc}")
+	public ItemPart saveTask(@PathVariable int id, @PathVariable String partNum, @PathVariable String partDesc) {
 		ItemPart itemPart = new ItemPart(partNum, partDesc);
 		itemPartService.save(itemPart);
 		return itemPart;
@@ -69,17 +72,17 @@ public class RestApiController {
 
 	// -- REST API for Item Part POs -- //
 
-	@GetMapping("/getAllPartPO")
+	@GetMapping("/getpartpo")
 	public List<ItemPartPO> allPartPOs() {
 		return itemPartPoService.findAll();
 	}
 
-	@GetMapping("/getPartPO/{id}")
+	@GetMapping("/getpartpo/{id}")
 	public Optional<ItemPartPO> findPartPO(@PathVariable int id) {
 		return itemPartPoService.findById(id);
 	}
 
-	@GetMapping("/deletePartPO/{id}")
+	@GetMapping("/deletepartpo/{id}")
 	public String deletePartPO(@PathVariable int id) {
 		return itemPartPoService.deleteById(id);
 	}
