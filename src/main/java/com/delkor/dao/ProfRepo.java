@@ -2,14 +2,14 @@ package com.delkor.dao;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.delkor.model.ItemPartPO;
+import com.delkor.model.Professor;
 
 /**
  * 
  * @author nmoua
  *
  */
-public interface ItemPartPoRepository extends CrudRepository<ItemPartPO, Integer> {
+public interface ProfRepo extends CrudRepository<Professor, Integer> {
 
 	
 }
